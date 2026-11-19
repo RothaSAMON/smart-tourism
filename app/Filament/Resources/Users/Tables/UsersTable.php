@@ -39,11 +39,20 @@ class UsersTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('user_type')
-                    ->label('User Type'),
+                    ->label('User Type')
+                    ->sortable()
+                    ->badge(),
                 TextColumn::make('status')
-                    ->label('Status'),
+                    ->label('Status')
+                    ->badge()
+                    ->sortable()
+                    ->color(fn (string $state): string => match ($state) {
+                        'active' => 'success',
+                        'inactive' => 'danger',
+                    }),
                 TextColumn::make('phone')
-                    ->label('Phone'),
+                    ->label('Phone')
+                    ->sortable(),
             ])
             ->filters([
                 TernaryFilter::make('email_verified_at')
