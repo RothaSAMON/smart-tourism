@@ -38,6 +38,12 @@ class UsersTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('user_type')
+                    ->label('User Type'),
+                TextColumn::make('status')
+                    ->label('Status'),
+                TextColumn::make('phone')
+                    ->label('Phone'),
             ])
             ->filters([
                 TernaryFilter::make('email_verified_at')

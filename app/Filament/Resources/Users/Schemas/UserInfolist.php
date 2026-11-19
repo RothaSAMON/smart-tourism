@@ -20,6 +20,12 @@ class UserInfolist
                     ->dateTime(),
                 TextEntry::make('updated_at')
                     ->dateTime(),
+                TextEntry::make('user_type')
+                    ->label('User Type'),
+                TextEntry::make('status')
+                    ->label('Status'),
+                TextEntry::make('phone')
+                    ->label('Phone'),
             ]);
     }
 }
