@@ -21,4 +21,12 @@ class Province extends Model
     {
         return $this->hasMany(Attraction::class);
     }
+
+    /**
+     * @return HasMany<Event, $this>
+     */
+    public function events(): HasMany
+    {
+        return $this->hasMany(Event::class);
+    }
 }

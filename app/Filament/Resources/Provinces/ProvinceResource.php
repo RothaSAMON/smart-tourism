@@ -15,12 +15,15 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class ProvinceResource extends Resource
 {
     protected static ?string $model = Province::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGlobeAlt;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Destinations';
 
     protected static ?int $navigationSort = 1;
 
