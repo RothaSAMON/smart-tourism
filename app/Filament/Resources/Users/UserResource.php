@@ -10,6 +10,7 @@ use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\Schemas\UserInfolist;
 use App\Filament\Resources\Users\Tables\UsersTable;
 use App\Models\User;
+use App\Traits\Filament\HasResourcePermissions;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -19,7 +20,11 @@ use UnitEnum;
 
 class UserResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = User::class;
+
+    protected static string $permissionResource = 'Users';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 

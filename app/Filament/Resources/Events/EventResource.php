@@ -10,6 +10,7 @@ use App\Filament\Resources\Events\Schemas\EventForm;
 use App\Filament\Resources\Events\Schemas\EventInfolist;
 use App\Filament\Resources\Events\Tables\EventsTable;
 use App\Models\Event;
+use App\Traits\Filament\HasResourcePermissions;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -19,7 +20,11 @@ use UnitEnum;
 
 class EventResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = Event::class;
+
+    protected static string $permissionResource = 'Events';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 

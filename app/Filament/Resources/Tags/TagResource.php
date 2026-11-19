@@ -10,6 +10,7 @@ use App\Filament\Resources\Tags\Schemas\TagForm;
 use App\Filament\Resources\Tags\Schemas\TagInfolist;
 use App\Filament\Resources\Tags\Tables\TagsTable;
 use App\Models\Tag;
+use App\Traits\Filament\HasResourcePermissions;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -19,7 +20,11 @@ use UnitEnum;
 
 class TagResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = Tag::class;
+
+    protected static string $permissionResource = 'Tags';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHashtag;
 

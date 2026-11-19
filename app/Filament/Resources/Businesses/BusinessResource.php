@@ -10,6 +10,7 @@ use App\Filament\Resources\Businesses\Schemas\BusinessForm;
 use App\Filament\Resources\Businesses\Schemas\BusinessInfolist;
 use App\Filament\Resources\Businesses\Tables\BusinessesTable;
 use App\Models\Business;
+use App\Traits\Filament\HasResourcePermissions;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -19,7 +20,11 @@ use UnitEnum;
 
 class BusinessResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = Business::class;
+
+    protected static string $permissionResource = 'Businesses';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingStorefront;
 

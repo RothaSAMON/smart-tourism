@@ -10,6 +10,7 @@ use App\Filament\Resources\Bookings\Schemas\BookingForm;
 use App\Filament\Resources\Bookings\Schemas\BookingInfolist;
 use App\Filament\Resources\Bookings\Tables\BookingsTable;
 use App\Models\Booking;
+use App\Traits\Filament\HasResourcePermissions;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -19,7 +20,11 @@ use UnitEnum;
 
 class BookingResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = Booking::class;
+
+    protected static string $permissionResource = 'Bookings';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTicket;
 

@@ -49,6 +49,11 @@ class UserForm
                     ->required(),
                 TextInput::make('phone')
                     ->label('Phone'),
+                Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable(),
             ]);
     }
 }

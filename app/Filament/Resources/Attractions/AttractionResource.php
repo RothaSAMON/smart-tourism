@@ -10,6 +10,7 @@ use App\Filament\Resources\Attractions\Schemas\AttractionForm;
 use App\Filament\Resources\Attractions\Schemas\AttractionInfolist;
 use App\Filament\Resources\Attractions\Tables\AttractionsTable;
 use App\Models\Attraction;
+use App\Traits\Filament\HasResourcePermissions;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -19,7 +20,11 @@ use UnitEnum;
 
 class AttractionResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = Attraction::class;
+
+    protected static string $permissionResource = 'Attractions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMapPin;
 

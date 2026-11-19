@@ -3,9 +3,18 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\Permissions\AttractionPermissionSeeder;
+use Database\Seeders\Permissions\BookingPermissionSeeder;
+use Database\Seeders\Permissions\BusinessPermissionSeeder;
+use Database\Seeders\Permissions\CategoryPermissionSeeder;
+use Database\Seeders\Permissions\EventPermissionSeeder;
+use Database\Seeders\Permissions\PermissionPermissionSeeder;
+use Database\Seeders\Permissions\ProvincePermissionSeeder;
+use Database\Seeders\Permissions\RolePermissionSeeder;
+use Database\Seeders\Permissions\TagPermissionSeeder;
+use Database\Seeders\Permissions\UserPermissionSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,8 +29,8 @@ class DatabaseSeeder extends Seeder
         User::firstOrCreate(
             ['email' => 'admin@admin.com'],
             [
-                'name' => 'Admin',
-                'password' => Hash::make('zaq1ZAQ!'),
+                'name' => 'Admin User',
+                'password' => 'zaq1ZAQ!',
                 'phone' => '+855 12 000 001',
                 'status' => 'active',
                 'user_type' => 'admin',
@@ -29,6 +38,21 @@ class DatabaseSeeder extends Seeder
         );
 
         $this->call([
+            RoleSeeder::class,
+
+            // Permissions (one seeder per CRUD)
+            ProvincePermissionSeeder::class,
+            CategoryPermissionSeeder::class,
+            AttractionPermissionSeeder::class,
+            TagPermissionSeeder::class,
+            BusinessPermissionSeeder::class,
+            EventPermissionSeeder::class,
+            BookingPermissionSeeder::class,
+            UserPermissionSeeder::class,
+            RolePermissionSeeder::class,
+            PermissionPermissionSeeder::class,
+
+            // Cambodia Tourism Data
             ProvinceSeeder::class,
             CategorySeeder::class,
             TagSeeder::class,

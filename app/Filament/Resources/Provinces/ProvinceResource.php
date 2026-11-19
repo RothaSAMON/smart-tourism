@@ -10,6 +10,7 @@ use App\Filament\Resources\Provinces\Schemas\ProvinceForm;
 use App\Filament\Resources\Provinces\Schemas\ProvinceInfolist;
 use App\Filament\Resources\Provinces\Tables\ProvincesTable;
 use App\Models\Province;
+use App\Traits\Filament\HasResourcePermissions;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -19,7 +20,11 @@ use UnitEnum;
 
 class ProvinceResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = Province::class;
+
+    protected static string $permissionResource = 'Provinces';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedGlobeAlt;
 
