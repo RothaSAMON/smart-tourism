@@ -4,10 +4,10 @@ namespace App\Enums;
 
 enum RoleEnum: string
 {
-    case DEVELOPER = 'developer';
-    case ADMIN = 'admin';
-    case BUSINESS_OWNER = 'business_owner';
-    case USER = 'user';
+    case DEVELOPER = 'Developer';
+    case ADMIN = 'Admin';
+    case BUSINESS_OWNER = 'Business Owner';
+    case USER = 'User';
 
     /**
      * Get a human-readable label.
