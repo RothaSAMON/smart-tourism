@@ -29,7 +29,9 @@ Route::middleware(['auth:api', CheckAuthStatus::class,])->group(function () {
 });
 
 
-Route::post('register', [AuthUserController::class, 'register']);
-Route::post('login', [AuthUserController::class, 'login']);
-Route::post('user/login', [AuthUserController::class, 'loginUser']);
-Route::post('backend/login', [AuthUserController::class, 'loginBackend']);
+Route::prefix('auth')->group(function () {
+    Route::post('register', [AuthUserController::class, 'register']);
+    Route::post('login', [AuthUserController::class, 'login']);
+    Route::post('user/login', [AuthUserController::class, 'loginUser']);
+    Route::post('backend/login', [AuthUserController::class, 'loginBackend']);
+});
