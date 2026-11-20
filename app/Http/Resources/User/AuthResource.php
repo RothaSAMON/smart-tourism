@@ -2,9 +2,6 @@
 
 namespace App\Http\Resources\User;
 
-use App\Enum\SpecialPermissionEnum;
-use App\Http\Resources\Oauth\V1\UserWalletResource;
-use App\Services\User\RoleService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,12 +16,12 @@ class AuthResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'uuid' => $this->uuid,
             'name' => $this->name,
             'email' => $this->email,
+            'phone' => $this->phone,
             'status' => $this->status,
-            'phone_number' => $this->phone_number,
             'user_type' => $this->user_type,
+            'roles' => $this->whenLoaded('roles', fn () => $this->roles->pluck('name')->values()),
         ];
     }
 }

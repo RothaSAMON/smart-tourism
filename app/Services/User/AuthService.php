@@ -4,27 +4,23 @@ namespace App\Services\User;
 
 use App\Enums\ErrorCodeEnum;
 use App\Enums\UserStatusEnum;
-use App\Models\User;
+use App\Http\Exceptions\CustomHttpException;
 use App\Libraries\ExceptionLib;
-use App\Services\User\UserService;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
     /**
-     * Authenticate and validate a user based on credentials, status, parent status, and roles.
+     * Authenticate and validate a user based on email, password, and status.
      *
-     * @param string $username
-     * @param string $password
-     * @param array|null $allowedRoles
-     * @return User
-     * @throws \App\Http\Exceptions\CustomHttpException
+     * @throws CustomHttpException
      */
     public static function authenticate(string $email, string $password): User
     {
         $user = User::where('email', $email)->first();
 
-        if (!$user) {
+        if (! $user) {
             ExceptionLib::throwCustomException(
                 'User not found.',
                 ErrorCodeEnum::USER_NOT_FOUND->value,
@@ -36,7 +32,7 @@ class AuthService
 
         if (
             $hashInfo['algoName'] === 'unknown'
-            || !Hash::check($password, $user->password)
+            || ! Hash::check($password, $user->password)
         ) {
             ExceptionLib::throwCustomException(
                 'Invalid credentials.',
