@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Models\User;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ViewEntry;
 use Filament\Schemas\Schema;
 
 class UserInfolist
@@ -26,6 +28,12 @@ class UserInfolist
                     ->label('Status'),
                 TextEntry::make('phone')
                     ->label('Phone'),
+                ViewEntry::make('roles_and_permissions')
+                    ->label('Roles & Permissions')
+                    ->view('filament.resources.users.infolists.roles-and-permissions', fn (User $record): array => [
+                        'user' => $record,
+                    ])
+                    ->columnSpanFull(),
             ]);
     }
 }

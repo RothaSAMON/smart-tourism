@@ -2,9 +2,13 @@
 
 namespace App\Filament\Resources\Roles\Schemas;
 
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Html;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\GridDirection;
 use Illuminate\Support\Str;
@@ -17,7 +21,7 @@ class RoleForm
         $permissions = Permission::query()->get();
 
         $groupedPermissions = $permissions
-            ->groupBy(fn (Permission $permission): string => $permission->type ?: static::guessGroup($permission->name))
+            ->groupBy(fn(Permission $permission): string => $permission->type ?: static::guessGroup($permission->name))
             ->sortKeys();
 
         $actionOrder = ['view', 'create', 'delete', 'edit', 'preview'];
@@ -33,23 +37,44 @@ class RoleForm
             })->values();
 
             $options = $sortedPermissions
-                ->mapWithKeys(fn (Permission $permission): array => [
-                    (string) $permission->id => Str::headline(static::actionLabel($permission->name, $group)),
+                ->mapWithKeys(fn(Permission $permission): array => [
+                    (string) $permission->id => Str::headline(static::actionLabel($permission->name, $group) . ' ' . Str::singular($group)),
                 ])
                 ->all();
 
-            $stateKey = 'permission_group_'.Str::slug($group, '_');
+            $stateKey = 'permission_group_' . Str::slug($group, '_');
+            $selectAllStateKey = 'select_all_' . $stateKey;
+            $permissionIds = array_keys($options);
+
+            $permissionComponents[] = Group::make()
+                ->childComponents(
+                    Schema::make()
+                        ->components([
+                            Checkbox::make($selectAllStateKey)
+                                ->label('Select all ' . Str::headline($group) . ' permissions')
+                                ->hiddenLabel()
+                                ->default(false)
+                                ->live()
+                                ->dehydrated(false)
+                                ->afterStateUpdated(function (?bool $state, Set $set) use ($stateKey, $permissionIds): void {
+                                    $set($stateKey, $state ? $permissionIds : []);
+                                }),
+                            Html::make('<span style="font-size: 1.25rem; font-weight: 700;">' . e(Str::headline($group)) . '</span>'),
+                        ])
+                        ->inline()
+                        ->gap(3),
+                );
 
             $permissionComponents[] = CheckboxList::make($stateKey)
-                ->label(Str::headline($group))
+                ->hiddenLabel()
                 ->options($options)
                 ->columns(min(4, max(1, count($options))))
                 ->gridDirection(GridDirection::Row)
-                ->bulkToggleable()
                 ->dehydrated()
-                ->afterStateHydrated(function (CheckboxList $component, $record) use ($sortedPermissions): void {
+                ->afterStateHydrated(function (CheckboxList $component, $record, Set $set) use ($sortedPermissions, $selectAllStateKey): void {
                     if (! $record) {
                         $component->state([]);
+                        $set($selectAllStateKey, false);
 
                         return;
                     }
@@ -59,10 +84,10 @@ class RoleForm
                     $selectedIds = $record->permissions()
                         ->whereIn('id', $groupIds)
                         ->pluck('id')
-                        ->map(fn ($id): string => (string) $id)
+                        ->map(fn($id): string => (string) $id)
                         ->all();
-
                     $component->state($selectedIds);
+                    $set($selectAllStateKey, count($selectedIds) === $sortedPermissions->count());
                 });
         }
 
@@ -90,7 +115,7 @@ class RoleForm
 
     protected static function actionLabel(string $permissionName, string $group): string
     {
-        $suffix = ' '.$group;
+        $suffix = ' ' . $group;
 
         if (str_ends_with($permissionName, $suffix)) {
             return trim(substr($permissionName, 0, -strlen($suffix)));

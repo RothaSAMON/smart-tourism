@@ -10,7 +10,7 @@
 ## Test class and methods
 
 - Extend the base `TestCase` of the project in each feature test class.
-- Extend `PHPUnit\Framework\TestCase` in each unit test class, as the stub of `php artisan make:test --unit` does. A unit test covers logic that does not use the framework, so it does not boot the application.
+- Extend `PHPUnit\Framework\TestCase` in each unit test class, as the stub of `vendor/bin/sail artisan make:test --unit` does. A unit test covers logic that does not use the framework, so it does not boot the application.
 - Give each test method the prefix `test_`, or add the `#[Test]` attribute to the method. Use the convention of the other files in the same directory.
 
 ## Naming tests
