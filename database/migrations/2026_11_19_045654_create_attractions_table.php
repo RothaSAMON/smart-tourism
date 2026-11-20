@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_attractions', function (Blueprint $table) {
+        Schema::create('attractions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Province::class)->constrained('table_provinces')->cascadeOnDelete();
-            $table->foreignIdFor(Category::class)->constrained('table_categories')->cascadeOnDelete();
+            $table->foreignIdFor(Province::class)->constrained('provinces')->cascadeOnDelete();
+            $table->foreignIdFor(Category::class)->constrained('categories')->cascadeOnDelete();
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('latitude', 10, 7)->nullable();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_attractions');
+        Schema::dropIfExists('attractions');
     }
 };

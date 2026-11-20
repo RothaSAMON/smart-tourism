@@ -22,10 +22,9 @@ class StoreItineraryRequest extends FormRequest
             'total_days' => ['required', 'integer', 'min:1'],
             'budget' => ['sometimes', 'numeric', 'min:0'],
             'items' => ['sometimes', 'array'],
-            'items.*.attraction_id' => ['required', 'integer', 'exists:table_attractions,id'],
+            'items.*.attraction_id' => ['required', 'integer', 'exists:attractions,id'],
             'items.*.day_number' => ['required', 'integer', 'min:1'],
             'items.*.visit_order' => ['required', 'integer', 'min:1'],
         ];
     }
 }
-

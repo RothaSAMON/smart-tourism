@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_itinerary_items', function (Blueprint $table) {
+        Schema::create('itinerary_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Itinerary::class)->constrained('table_itineraries')->cascadeOnDelete();
-            $table->foreignIdFor(Attraction::class)->constrained('table_attractions')->cascadeOnDelete();
+            $table->foreignIdFor(Itinerary::class)->constrained('itineraries')->cascadeOnDelete();
+            $table->foreignIdFor(Attraction::class)->constrained('attractions')->cascadeOnDelete();
             $table->unsignedInteger('day_number')->default(1);
             $table->unsignedInteger('visit_order')->default(1);
             $table->timestamps();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_itinerary_items');
+        Schema::dropIfExists('itinerary_items');
     }
 };

@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_bookings', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained('users')->cascadeOnDelete();
-            $table->foreignIdFor(Business::class)->constrained('table_businesses')->cascadeOnDelete();
+            $table->foreignIdFor(Business::class)->constrained('businesses')->cascadeOnDelete();
             $table->date('booking_date');
             $table->integer('people');
             $table->decimal('total_price', 10, 2);
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_bookings');
+        Schema::dropIfExists('bookings');
     }
 };

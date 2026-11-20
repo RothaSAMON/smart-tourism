@@ -17,10 +17,9 @@ class StoreItineraryItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'attraction_id' => ['required', 'integer', 'exists:table_attractions,id'],
+            'attraction_id' => ['required', 'integer', 'exists:attractions,id'],
             'day_number' => ['required', 'integer', 'min:1'],
             'visit_order' => ['required', 'integer', 'min:1'],
         ];
     }
 }
-

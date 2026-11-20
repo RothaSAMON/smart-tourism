@@ -17,8 +17,8 @@ class UpdateAttractionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'province_id' => ['sometimes', 'required', 'integer', 'exists:table_provinces,id'],
-            'category_id' => ['sometimes', 'required', 'integer', 'exists:table_categories,id'],
+            'province_id' => ['sometimes', 'required', 'integer', 'exists:provinces,id'],
+            'category_id' => ['sometimes', 'required', 'integer', 'exists:categories,id'],
             'name' => ['sometimes', 'required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'latitude' => ['nullable', 'numeric', 'between:-90,90'],

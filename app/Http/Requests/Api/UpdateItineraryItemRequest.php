@@ -17,10 +17,9 @@ class UpdateItineraryItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'attraction_id' => ['sometimes', 'required', 'integer', 'exists:table_attractions,id'],
+            'attraction_id' => ['sometimes', 'required', 'integer', 'exists:attractions,id'],
             'day_number' => ['sometimes', 'required', 'integer', 'min:1'],
             'visit_order' => ['sometimes', 'required', 'integer', 'min:1'],
         ];
     }
 }
-

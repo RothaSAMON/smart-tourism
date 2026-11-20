@@ -19,7 +19,7 @@ class UpdateBookingRequest extends FormRequest
     {
         return [
             'user_id' => ['sometimes', 'required', 'integer', 'exists:users,id'],
-            'business_id' => ['sometimes', 'required', 'integer', 'exists:table_businesses,id'],
+            'business_id' => ['sometimes', 'required', 'integer', 'exists:businesses,id'],
             'booking_date' => ['sometimes', 'required', 'date', 'date_format:Y-m-d'],
             'people' => ['sometimes', 'required', 'integer', 'min:1'],
             'total_price' => ['sometimes', 'required', 'numeric', 'min:0'],
@@ -27,4 +27,3 @@ class UpdateBookingRequest extends FormRequest
         ];
     }
 }
-
