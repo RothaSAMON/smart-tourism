@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AttractionController;
+use App\Http\Controllers\Api\BusinessController;
 use Illuminate\Support\Facades\Route;
 
-// Public Attraction APIs
+// Public Tourism APIs
 Route::apiResource('attractions', AttractionController::class);
+Route::apiResource('businesses', BusinessController::class);
