@@ -33,7 +33,7 @@ class ProvincePermissionSeeder extends Seeder
         foreach ($actions as $action) {
             $this->generatePermission(
                 ['name' => "$action $permissionName"],
-                ['guard_name' => $guardName],
+                ['guard_name' => $guardName, 'type' => $permissionName],
                 $roles
             );
         }
