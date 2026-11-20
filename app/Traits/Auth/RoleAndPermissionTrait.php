@@ -8,6 +8,7 @@ use App\Traits\Permissions\BookingPermissionTrait;
 use App\Traits\Permissions\BusinessPermissionTrait;
 use App\Traits\Permissions\CategoryPermissionTrait;
 use App\Traits\Permissions\EventPermissionTrait;
+use App\Traits\Permissions\ItineraryPermissionTrait;
 use App\Traits\Permissions\PermissionPermissionTrait;
 use App\Traits\Permissions\ProvincePermissionTrait;
 use App\Traits\Permissions\RolePermissionTrait;
@@ -21,6 +22,7 @@ trait RoleAndPermissionTrait
     use BusinessPermissionTrait;
     use CategoryPermissionTrait;
     use EventPermissionTrait;
+    use ItineraryPermissionTrait;
     use PermissionPermissionTrait;
     use ProvincePermissionTrait;
     use RolePermissionTrait;

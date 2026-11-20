@@ -8,6 +8,7 @@ use Database\Seeders\Permissions\BookingPermissionSeeder;
 use Database\Seeders\Permissions\BusinessPermissionSeeder;
 use Database\Seeders\Permissions\CategoryPermissionSeeder;
 use Database\Seeders\Permissions\EventPermissionSeeder;
+use Database\Seeders\Permissions\ItineraryPermissionSeeder;
 use Database\Seeders\Permissions\PermissionPermissionSeeder;
 use Database\Seeders\Permissions\ProvincePermissionSeeder;
 use Database\Seeders\Permissions\RolePermissionSeeder;
@@ -48,6 +49,7 @@ class DatabaseSeeder extends Seeder
             BusinessPermissionSeeder::class,
             EventPermissionSeeder::class,
             BookingPermissionSeeder::class,
+            ItineraryPermissionSeeder::class,
             UserPermissionSeeder::class,
             RolePermissionSeeder::class,
             PermissionPermissionSeeder::class,
@@ -60,6 +62,7 @@ class DatabaseSeeder extends Seeder
             BusinessSeeder::class,
             EventSeeder::class,
             BookingSeeder::class,
+            ItinerarySeeder::class,
         ]);
     }
 }
