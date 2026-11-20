@@ -6,6 +6,8 @@ use App\Models\User;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
 
 class UserInfolist
 {
@@ -32,6 +34,10 @@ class UserInfolist
                     ->label('Roles & Permissions')
                     ->view('filament.resources.users.infolists.roles-and-permissions', fn (User $record): array => [
                         'user' => $record,
+                        'roles' => $record->roles,
+                        'groupedPermissions' => $record->getAllPermissions()
+                            ->groupBy(fn (Permission $permission): string => $permission->type ?: Str::after($permission->name, ' '))
+                            ->sortKeys(),
                     ])
                     ->columnSpanFull(),
             ]);
