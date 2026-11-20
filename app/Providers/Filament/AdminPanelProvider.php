@@ -31,9 +31,9 @@ class AdminPanelProvider extends PanelProvider
             ->login()
 
             // Logo
-            // ->brandName('Tourism Cambodia')
+            ->brandName('Smart Tourism')
             ->brandLogo(fn (): string => asset('logo.png'))
-            ->brandLogoHeight('4.5rem')
+            ->brandLogoHeight('3rem')
             ->favicon(asset('logo.png'))
             ->colors([
                 'primary' => Color::Amber,
